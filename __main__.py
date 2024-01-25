@@ -10,3 +10,6 @@ if not os.path.exists("\\out"):
 else:
     selfLabels = open("/out/selflabels.txt", "a")
     selfLabels = open("/out/opponentlables.txt", "a")
+
+api = a.RocketLeauge(player_name=config.Tracking.self.username)
+print(api.makeAPIRequest())

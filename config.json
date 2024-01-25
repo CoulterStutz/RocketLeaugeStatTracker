@@ -5,6 +5,7 @@
   },
   "Tracking": {
     "Self": {
+      "PlayerName": "psych0_naught",
       "TrackSelf": true,
       "TrackTotalGoals": true,
       "TrackTotalSaves": true,
