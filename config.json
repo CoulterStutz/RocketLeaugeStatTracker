@@ -1,27 +1,20 @@
 {
-  "API": {
-    "API": "",
+  "APISettings": {
+    "APIKey": "",
     "RefreshRate": 1
   },
   "Tracking": {
     "Self": {
       "PlayerName": "psych0_naught",
       "TrackSelf": true,
-      "TrackTotalGoals": true,
-      "TrackTotalSaves": true,
-      "TrackTotalWins": true,
-      "TrackCurrentRank": true,
-      "TrackGoalAccuracy": true,
-      "TrackWinsToday": true
+      "TrackTotalSeasonGames": true,
+      "TrackCurrentRank": true
     },
     "Opponent": {
-      "TrackOpponents": {},
-      "TrackMultipleOpponents": {},
-      "TrackTotalGoals": {},
-      "TrackTotalSaves": {},
-      "TrackTotalWins": {},
-      "TrackCurrentRank": {},
-      "TrackGoalAccuracy": {}
+      "TrackOpponents": false,
+      "TrackMultipleOpponents": false,
+      "TrackTotalSeasonGames": false,
+      "TrackCurrentRank": false
     }
   },
   "DisplaySettings": {

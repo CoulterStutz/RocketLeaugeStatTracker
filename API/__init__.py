@@ -1,13 +1,13 @@
 import requests
 
 
-class RocketLeauge():
+class RocketLeague():
     def __init__(self, player_name, apiSettings, trackingSettings):
         self.url = "https://rocket-league1.p.rapidapi.com/ranks/psych0_naught"
         self.headers = {
             "User-Agent": "RapidAPI Playground",
             "Accept-Encoding": "identity",
-            "X-RapidAPI-Key": apiSettings.API,
+            "X-RapidAPI-Key": apiSettings["APIKey"],
             "X-RapidAPI-Host": "rocket-league1.p.rapidapi.com"
         }
 
