@@ -1,0 +1,44 @@
+{
+  "API": {
+    "API": {},
+    "RefreshRate": {}
+  },
+  "Tracking": {
+    "Self": {
+      "TrackSelf": {},
+      "TrackTotalGoals": {},
+      "TrackTotalSaves": {},
+      "TrackTotalWins": {},
+      "TrackCurrentRank": {},
+      "TrackGoalAccuracy": {}
+    },
+    "Opponent": {
+      "TrackOpponents": {},
+      "TrackMultipleOpponents": {},
+      "TrackTotalGoals": {},
+      "TrackTotalSaves": {},
+      "TrackTotalWins": {},
+      "TrackCurrentRank": {},
+      "TrackGoalAccuracy": {}
+    }
+  },
+  "DisplaySettings": {
+    "Colors": {
+      "Rank": {
+        "Bronze": {},
+        "Silver": {},
+        "Gold": {},
+        "Platinum": {},
+        "Diamond": {},
+        "Champion": {},
+        "Grand": {},
+        "SSL": {}
+      },
+      "TextColors": {
+        "LabelColor": {},
+        "ValueColor": {},
+        "": {}
+      }
+    }
+  }
+}
