@@ -1,16 +1,17 @@
 {
   "API": {
-    "API": {},
-    "RefreshRate": {}
+    "API": "",
+    "RefreshRate": 1
   },
   "Tracking": {
     "Self": {
-      "TrackSelf": {},
-      "TrackTotalGoals": {},
-      "TrackTotalSaves": {},
-      "TrackTotalWins": {},
-      "TrackCurrentRank": {},
-      "TrackGoalAccuracy": {}
+      "TrackSelf": true,
+      "TrackTotalGoals": true,
+      "TrackTotalSaves": true,
+      "TrackTotalWins": true,
+      "TrackCurrentRank": true,
+      "TrackGoalAccuracy": true,
+      "TrackWinsToday": true
     },
     "Opponent": {
       "TrackOpponents": {},
