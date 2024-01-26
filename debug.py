@@ -22,3 +22,5 @@ def debug(interaction_type, interaction_name, interaction_value=None):
                 print(colored(f"Created/Opened File {interaction_name}!", 'yellow'))
             elif interaction_type == InteractionTypes[1]:
                 print(colored(f"Wrote Value {interaction_value} to file {interaction_name}"))
+            elif interaction_type == InteractionTypes[2]:
+                print(colored(f"Cleared File {interaction_name}!", 'yellow'))
