@@ -17,31 +17,30 @@ DisplaySettings = config_data['DisplaySettings']
 if not os.path.exists("out"):
     os.mkdir("out")
 
-# Open files in append mode
-v1RankFile = open("out/1v1rank.txt", "w+")
-v1DivisionFile = open("out/1v1division.txt", "a")
-v1MMRFile = open("out/1v1mmr.txt", "a")
-v1StreakFile = open("out/1v1streak.txt", "a")
-v1PlayedFile = open("out/1v1played.txt", "a")
+# Open files in write mode
+v1RankFile = open("out/1v1rank.txt", "w")
+v1DivisionFile = open("out/1v1division.txt", "w")
+v1MMRFile = open("out/1v1mmr.txt", "w")
+v1StreakFile = open("out/1v1streak.txt", "w")
+v1PlayedFile = open("out/1v1played.txt", "w")
 
-v2RankFile = open("out/2v2rank.txt", "a")
-v2DivisionFile = open("out/2v2division.txt", "a")
-v2MMRFile = open("out/2v2mmr.txt", "a")
-v2StreakFile = open("out/2v2streak.txt", "a")
-v2PlayedFile = open("out/2v2played.txt", "a")
+v2RankFile = open("out/2v2rank.txt", "w")
+v2DivisionFile = open("out/2v2division.txt", "w")
+v2MMRFile = open("out/2v2mmr.txt", "w")
+v2StreakFile = open("out/2v2streak.txt", "w")
+v2PlayedFile = open("out/2v2played.txt", "w")
 
-v3RankFile = open("out/3v3rank.txt", "a")
-v3DivisionFile = open("out/3v3division.txt", "a")
-v3MMRFile = open("out/3v3mmr.txt", "a")
-v3StreakFile = open("out/3v3streak.txt", "a")
-v3PlayedFile = open("out/3v3played.txt", "a")
+v3RankFile = open("out/3v3rank.txt", "w")
+v3DivisionFile = open("out/3v3division.txt", "w")
+v3MMRFile = open("out/3v3mmr.txt", "w")
+v3StreakFile = open("out/3v3streak.txt", "w")
+v3PlayedFile = open("out/3v3played.txt", "w")
 
 # Initialize API with extracted data
 api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=api, trackingSettings=TrackingConfig)
 
 while True:
-    api_output = api.makeAPIRequest()
-    print(api_output)
+    api_output = api.makeRankedAPIRequest()
 
     # Check if 'ranks' key exists in the API response
     if 'ranks' in api_output:
@@ -91,5 +90,21 @@ while True:
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
 
-    time.sleep(60)
+# Close all files at the end of the script
+v1RankFile.close()
+v1DivisionFile.close()
+v1MMRFile.close()
+v1StreakFile.close()
+v1PlayedFile.close()
 
+v2RankFile.close()
+v2DivisionFile.close()
+v2MMRFile.close()
+v2StreakFile.close()
+v2PlayedFile.close()
+
+v3RankFile.close()
+v3DivisionFile.close()
+v3MMRFile.close()
+v3StreakFile.close()
+v3PlayedFile.close()
