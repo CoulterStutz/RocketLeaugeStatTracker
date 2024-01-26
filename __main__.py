@@ -1,5 +1,7 @@
 import json
 import time
+
+import funcs
 from funcs import *
 from debug import *
 from termcolor import colored
@@ -162,20 +164,4 @@ while True:
         os.system("cls")
 
 # Close all files at the end of the script
-v1RankFile.close()
-v1DivisionFile.close()
-v1MMRFile.close()
-v1StreakFile.close()
-v1PlayedFile.close()
-
-v2RankFile.close()
-v2DivisionFile.close()
-v2MMRFile.close()
-v2StreakFile.close()
-v2PlayedFile.close()
-
-v3RankFile.close()
-v3DivisionFile.close()
-v3MMRFile.close()
-v3StreakFile.close()
-v3PlayedFile.close()
+funcs.close_files()
