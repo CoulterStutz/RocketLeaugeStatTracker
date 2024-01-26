@@ -1,3 +1,5 @@
+import json
+
 with open('config.json', 'r') as file:
     config_data = json.load(file)
 
@@ -22,3 +24,13 @@ def get_rank_color(rank:str):
         return DS["Colors"]["Rank"]["Grand Champion"]
     elif r == "super":
         return DS["Colors"]["Rank"]["SSL"]
+    
+if __name__ == "__main__": # Debug
+    print(get_rank_color("Bronze I"))
+    print(get_rank_color("Silver II"))
+    print(get_rank_color("Gold III"))
+    print(get_rank_color("Platinum IV"))
+    print(get_rank_color("Diamond I"))
+    print(get_rank_color("Champion II"))
+    print(get_rank_color("Grand Champion III"))
+    print(get_rank_color("Super Sonic Legend IV"))
