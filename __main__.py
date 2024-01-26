@@ -1,7 +1,3 @@
-import json
-import time
-
-import funcs
 from funcs import *
 from debug import *
 from termcolor import colored
@@ -99,6 +95,12 @@ while True:
         v1PlayedFile.write(f"{Ranked1v1Played}\n")
         debug(InteractionTypes[1], "1v1played.txt", Ranked1v1Played)
 
+        v1RankFile.flush()
+        v1DivisionFile.flush()
+        v1MMRFile.flush()
+        v1StreakFile.flush()
+        v1PlayedFile.flush()
+
         # Check if there are more than one rank in the API response
         if len(api_output['ranks']) > 1:
             # Extract values for 2v2
@@ -120,6 +122,12 @@ while True:
             v2PlayedFile.write(f"{Ranked2v2Played}\n")
             debug(InteractionTypes[1], "2v2played.txt", Ranked2v2Played)
 
+            v2RankFile.flush()
+            v2DivisionFile.flush()
+            v2MMRFile.flush()
+            v2StreakFile.flush()
+            v2PlayedFile.flush()
+
             # Check if there are more than two ranks in the API response
             if len(api_output['ranks']) > 2:
                 # Extract values for 3v3
@@ -140,6 +148,12 @@ while True:
                 debug(InteractionTypes[1], "3v3streak.txt", Ranked3v3Streak)
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
                 debug(InteractionTypes[1], "3v3played.txt", Ranked3v3Played)
+
+                v3RankFile.flush()
+                v3DivisionFile.flush()
+                v3MMRFile.flush()
+                v3StreakFile.flush()
+                v3PlayedFile.flush()
                 
                 print(colored("Fetched Ranks!", "Green"))
 
