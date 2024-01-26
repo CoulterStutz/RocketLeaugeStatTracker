@@ -6,6 +6,20 @@ with open('config.json', 'r') as file:
 
 DS = config_data['DisplaySettings']
 
+def close_files():
+    # List of file paths
+    file_paths = [
+        "out/1v1rank.txt", "out/1v1division.txt", "out/1v1mmr.txt", "out/1v1streak.txt", "out/1v1played.txt",
+        "out/2v2rank.txt", "out/2v2division.txt", "out/2v2mmr.txt", "out/2v2streak.txt", "out/2v2played.txt",
+        "out/3v3rank.txt", "out/3v3division.txt", "out/3v3mmr.txt", "out/3v3streak.txt", "out/3v3played.txt"
+    ]
+
+    # Loop through each file and close it
+    for file_path in file_paths:
+        if debug.isDebugEnabled():
+            debug.debug(debug.InteractionTypes[3], file_path)
+        file.close()
+
 def get_rank_color(rank:str):
     r = rank.split()[0].lower
 
