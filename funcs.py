@@ -40,6 +40,7 @@ def clear_files():
             if debug.isDebugEnabled():
                 debug.debug(debug.InteractionTypes[2], file_path)
             file.write("")
+            file.close()
 
 if __name__ == "__main__": # Debug
     print(get_rank_color("Bronze I"))
