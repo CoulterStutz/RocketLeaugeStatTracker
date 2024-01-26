@@ -90,6 +90,8 @@ while True:
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
 
+                time.sleep(60)
+
 # Close all files at the end of the script
 v1RankFile.close()
 v1DivisionFile.close()
