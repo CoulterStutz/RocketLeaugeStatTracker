@@ -8,7 +8,7 @@ with open('config.json', 'r') as file:
     config_data = json.load(file)
 debug = config_data['DebugEnabled']
 
-InteractionTypes = ["FileCreation", "FileWriting"]
+InteractionTypes = ["FileCreation", "FileWriting", "FileClearing"]
 
 def isDebugEnabled():
     return debug
