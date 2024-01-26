@@ -1,6 +1,6 @@
 import json
 import time, funcs
-import termcolor
+from termcolor import colored
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
 
@@ -41,6 +41,7 @@ api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings
 
 while True:
     api_output = api.makeRankedAPIRequest()
+    print(colored("Making API Request", "Gold"))
 
     # Check if 'ranks' key exists in the API response
     if 'ranks' in api_output:
@@ -89,6 +90,23 @@ while True:
                 v3RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n"))
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
+                
+                print(colored("Fetched Ranks!", "Green"))
+
+                print("\n1v1 Stats:")
+                print("Rank:", Ranked1v1Rank, Ranked1v1Division)
+                print("MMR:", Ranked1v1MMR)
+                print("Played: ", Ranked1v1Played)
+
+                print("\n2v2 Stats:")
+                print("Rank:", Ranked2v2Rank, Ranked2v2Division)
+                print("MMR:", Ranked2v2MMR)
+                print("Played: ", Ranked2v2Played)
+
+                print("\n3v3 Stats:")
+                print("Rank:", Ranked3v3Rank, Ranked3v3Division)
+                print("MMR:", Ranked3v3MMR)
+                print("Played: ", Ranked3v3Played)
 
                 time.sleep(60)
 
