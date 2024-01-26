@@ -20,14 +20,14 @@
   "DisplaySettings": {
     "Colors": {
       "Rank": {
-        "Bronze": {},
-        "Silver": {},
-        "Gold": {},
-        "Platinum": {},
-        "Diamond": {},
-        "Champion": {},
-        "Grand": {},
-        "SSL": {}
+        "Bronze": "#ff8b3d",
+        "Silver": "#b5b5b5",
+        "Gold": "#ffd53d",
+        "Platinum": "#616161",
+        "Diamond": "#0088ff",
+        "Champion": "#af5eff",
+        "Grand": "#ff665e",
+        "SSL": "#121212"
       },
       "TextColors": {
         "LabelColor": {},
