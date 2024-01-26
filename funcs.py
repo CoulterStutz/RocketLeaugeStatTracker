@@ -37,6 +37,8 @@ def clear_files():
     # Loop through each file and clear its content
     for file_path in file_paths:
         with open(file_path, 'w') as file:
+            if debug.isDebugEnabled():
+                debug.debug(debug.InteractionTypes[2], file_path)
             file.write("")
 
 if __name__ == "__main__": # Debug
