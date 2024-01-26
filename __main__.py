@@ -60,6 +60,7 @@ if isDebugEnabled():
     time.sleep(10)
 
 while True:
+    clear_files()
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
         api_output = {
