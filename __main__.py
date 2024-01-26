@@ -86,7 +86,7 @@ while True:
                 # Write values for 3v3 to separate files
                 v3RankFile.write(f"{Ranked3v3Rank}\n")
                 v3DivisionFile.write(f"{Ranked3v3Division}\n")
-                            v2RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n"))
+                v3RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n"))
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
 
