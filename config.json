@@ -1,7 +1,8 @@
 {
+  "DebugEnabled": false,
   "APISettings": {
     "APIKey": "",
-    "RefreshRate": 1
+    "RefreshRate": 10
   },
   "Tracking": {
     "Self": {

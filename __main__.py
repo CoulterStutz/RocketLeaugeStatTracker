@@ -1,5 +1,7 @@
 import json
-import time, funcs
+import time
+from funcs import *
+from debug import *
 from termcolor import colored
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
@@ -9,7 +11,7 @@ with open('config.json', 'r') as file:
     config_data = json.load(file)
 
 # Extract relevant data from the config
-api = config_data['APISettings']
+APISettings = config_data['APISettings']
 TrackingConfig = config_data['Tracking']
 DisplaySettings = config_data['DisplaySettings']
 
@@ -19,29 +21,60 @@ if not os.path.exists("out"):
 
 # Open files in write mode
 v1RankFile = open("out/1v1rank.txt", "w")
+debug(InteractionTypes[0], "1v1rank.txt")
 v1DivisionFile = open("out/1v1division.txt", "w")
+debug(InteractionTypes[0], "1v1division.txt")
 v1MMRFile = open("out/1v1mmr.txt", "w")
+debug(InteractionTypes[0], "1v1mmr.txt")
 v1StreakFile = open("out/1v1streak.txt", "w")
+debug(InteractionTypes[0], "1v1streak.txt")
 v1PlayedFile = open("out/1v1played.txt", "w")
+debug(InteractionTypes[0], "1v1played.txt")
 
 v2RankFile = open("out/2v2rank.txt", "w")
+debug(InteractionTypes[0], "2v2rank.txt")
 v2DivisionFile = open("out/2v2division.txt", "w")
+debug(InteractionTypes[0], "2v2division.txt")
 v2MMRFile = open("out/2v2mmr.txt", "w")
+debug(InteractionTypes[0], "2v2mmr.txt")
 v2StreakFile = open("out/2v2streak.txt", "w")
+debug(InteractionTypes[0], "2v2streak.txt")
 v2PlayedFile = open("out/2v2played.txt", "w")
+debug(InteractionTypes[0], "2v2played.txt")
 
 v3RankFile = open("out/3v3rank.txt", "w")
+debug(InteractionTypes[0], "3v3rank.txt")
 v3DivisionFile = open("out/3v3division.txt", "w")
+debug(InteractionTypes[0], "3v3division.txt")
 v3MMRFile = open("out/3v3mmr.txt", "w")
+debug(InteractionTypes[0], "3v3mmr.txt")
 v3StreakFile = open("out/3v3streak.txt", "w")
+debug(InteractionTypes[0], "3v3streak.txt")
 v3PlayedFile = open("out/3v3played.txt", "w")
+debug(InteractionTypes[0], "3v3played.txt")
 
 # Initialize API with extracted data
-api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=api, trackingSettings=TrackingConfig)
+api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=APISettings, trackingSettings=TrackingConfig)
+
+if isDebugEnabled():
+    time.sleep(10)
 
 while True:
-    api_output = api.makeRankedAPIRequest()
-    print(colored("Making API Request", "Gold"))
+    if isDebugEnabled():
+        print(colored("Making Debug API Request", "cyan"))
+        api_output = {
+            'ranks': [
+                {'division': 4, 'played': 257, 'rank': 'Silver II', 'playlist': 'Duel (Ranked)', 'mmr': 386,
+                 'streak': 1},
+                {'division': 4, 'played': 85, 'rank': 'Silver III', 'playlist': 'Doubles (Ranked)', 'mmr': 468,
+                 'streak': 1},
+                {'division': 3, 'played': 15, 'rank': 'Bronze II', 'playlist': 'Standard (Ranked)', 'mmr': 202,
+                 'streak': -3}
+            ]
+        }
+    else:
+        print(colored("Making API Request", "cyan"))
+        api_output = api.makeRankedAPIRequest()
 
     # Check if 'ranks' key exists in the API response
     if 'ranks' in api_output:
@@ -69,7 +102,7 @@ while True:
             Ranked2v2MMR = api_output['ranks'][1].get('mmr', 'N/A')
 
             # Write values for 2v2 to separate files
-            v2RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked2v2Rank)}]{Ranked2v2Rank}\n"))
+            v2RankFile.write(f"[color={get_rank_color(Ranked2v2Rank)}]{Ranked2v2Rank}\n")
             v2DivisionFile.write(f"{Ranked2v2Division}\n")
             v2MMRFile.write(f"{Ranked2v2MMR}\n")
             v2StreakFile.write(f"{Ranked2v2Streak}\n")
@@ -87,7 +120,7 @@ while True:
                 # Write values for 3v3 to separate files
                 v3RankFile.write(f"{Ranked3v3Rank}\n")
                 v3DivisionFile.write(f"{Ranked3v3Division}\n")
-                v3RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n"))
+                v3RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n")
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
                 
@@ -107,8 +140,9 @@ while True:
                 print("Rank:", Ranked3v3Rank, Ranked3v3Division)
                 print("MMR:", Ranked3v3MMR)
                 print("Played: ", Ranked3v3Played)
-
-                time.sleep(60)
+    print("Retrieved Stats")
+    time.sleep(APISettings["RefreshRate"])
+    os.system("cls")
 
 # Close all files at the end of the script
 v1RankFile.close()
