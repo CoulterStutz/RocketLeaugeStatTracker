@@ -1,6 +1,5 @@
 import json
 import time
-
 import termcolor
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
@@ -19,39 +18,78 @@ if not os.path.exists("out"):
     os.mkdir("out")
 
 # Open files in append mode
-v1RankedFile = open("out/1v1ranked.txt", "a")
-v2RankedFile = open("out/2v2ranked.txt", "a")
-v3RankedFile = open("out/3v3ranked.txt", "a")
+v1RankFile = open("out/1v1rank.txt", "w+")
+v1DivisionFile = open("out/1v1division.txt", "a")
+v1MMRFile = open("out/1v1mmr.txt", "a")
+v1StreakFile = open("out/1v1streak.txt", "a")
+v1PlayedFile = open("out/1v1played.txt", "a")
+
+v2RankFile = open("out/2v2rank.txt", "a")
+v2DivisionFile = open("out/2v2division.txt", "a")
+v2MMRFile = open("out/2v2mmr.txt", "a")
+v2StreakFile = open("out/2v2streak.txt", "a")
+v2PlayedFile = open("out/2v2played.txt", "a")
+
+v3RankFile = open("out/3v3rank.txt", "a")
+v3DivisionFile = open("out/3v3division.txt", "a")
+v3MMRFile = open("out/3v3mmr.txt", "a")
+v3StreakFile = open("out/3v3streak.txt", "a")
+v3PlayedFile = open("out/3v3played.txt", "a")
 
 # Initialize API with extracted data
 api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=api, trackingSettings=TrackingConfig)
 
 while True:
     api_output = api.makeAPIRequest()
-    time.sleep(600)
+    print(api_output)
 
-    Ranked1v1Division = api_output['ranks'][0]['division']
-    Ranked1v1Played = api_output['ranks'][0]['played']
-    Ranked1v1Rank = api_output['ranks'][0]['rank']
-    Ranked1v1Streak = api_output['ranks'][0]['streak']
-    Ranked1v1MMR = api_output['ranks'][0]['mmr']
+    # Check if 'ranks' key exists in the API response
+    if 'ranks' in api_output:
+        # Extract values for 1v1
+        Ranked1v1Division = api_output['ranks'][0].get('division', 'N/A')
+        Ranked1v1Played = api_output['ranks'][0].get('played', 'N/A')
+        Ranked1v1Rank = api_output['ranks'][0].get('rank', 'N/A')
+        Ranked1v1Streak = api_output['ranks'][0].get('streak', 'N/A')
+        Ranked1v1MMR = api_output['ranks'][0].get('mmr', 'N/A')
 
-    # Extract values for 2v2
-    Ranked2v2Division = api_output['ranks'][1]['division']
-    Ranked2v2Played = api_output['ranks'][1]['played']
-    Ranked2v2Rank = api_output['ranks'][1]['rank']
-    Ranked2v2Streak = api_output['ranks'][1]['streak']
-    Ranked2v2MMR = api_output['ranks'][1]['mmr']
+        # Write values for 1v1 to separate files
+        v1RankFile.write(f"{Ranked1v1Rank}\n")
+        v1DivisionFile.write(f"{Ranked1v1Division}\n")
+        v1MMRFile.write(f"{Ranked1v1MMR}\n")
+        v1StreakFile.write(f"{Ranked1v1Streak}\n")
+        v1PlayedFile.write(f"{Ranked1v1Played}\n")
 
-    # Extract values for 3v3
-    Ranked3v3Division = api_output['ranks'][2]['division']
-    Ranked3v3Played = api_output['ranks'][2]['played']
-    Ranked3v3Rank = api_output['ranks'][2]['rank']
-    Ranked3v3Streak = api_output['ranks'][2]['streak']
-    Ranked3v3MMR = api_output['ranks'][2]['mmr']
+        # Check if there are more than one rank in the API response
+        if len(api_output['ranks']) > 1:
+            # Extract values for 2v2
+            Ranked2v2Division = api_output['ranks'][1].get('division', 'N/A')
+            Ranked2v2Played = api_output['ranks'][1].get('played', 'N/A')
+            Ranked2v2Rank = api_output['ranks'][1].get('rank', 'N/A')
+            Ranked2v2Streak = api_output['ranks'][1].get('streak', 'N/A')
+            Ranked2v2MMR = api_output['ranks'][1].get('mmr', 'N/A')
 
-    v1RankedFile.write(f"1v1 Ranked\nRank: {Ranked1v1Rank}, Division: {Ranked1v1Division} ({Ranked1v1MMR})\nCurrent Win Streak: {Ranked1v1Streak}\nTotal Matches Played: {Ranked1v1Played}")
-    v2RankedFile.write(f"2v2 Ranked\nRank: {Ranked2v2Rank}, Division: {Ranked2v2Division} ({Ranked2v2MMR})\nCurrent Win Streak: {Ranked2v2Streak}\nTotal Matches Played: {Ranked2v2Played}\n\n")
-    v3RankedFile.write(f"3v3 Ranked\nRank: {Ranked3v3Rank}, Division: {Ranked3v3Division} ({Ranked3v3MMR})\nCurrent Win Streak: {Ranked3v3Streak}\nTotal Matches Played: {Ranked3v3Played}\n\n")
+            # Write values for 2v2 to separate files
+            v2RankFile.write(f"{Ranked2v2Rank}\n")
+            v2DivisionFile.write(f"{Ranked2v2Division}\n")
+            v2MMRFile.write(f"{Ranked2v2MMR}\n")
+            v2StreakFile.write(f"{Ranked2v2Streak}\n")
+            v2PlayedFile.write(f"{Ranked2v2Played}\n")
 
-    time.sleep(600)
+            # Check if there are more than two ranks in the API response
+            if len(api_output['ranks']) > 2:
+                # Extract values for 3v3
+                Ranked3v3Division = api_output['ranks'][2].get('division', 'N/A')
+                Ranked3v3Played = api_output['ranks'][2].get('played', 'N/A')
+                Ranked3v3Rank = api_output['ranks'][2].get('rank', 'N/A')
+                Ranked3v3Streak = api_output['ranks'][2].get('streak', 'N/A')
+                Ranked3v3MMR = api_output['ranks'][2].get('mmr', 'N/A')
+
+                # Write values for 3v3 to separate files
+                v3RankFile.write(f"{Ranked3v3Rank}\n")
+                v3DivisionFile.write(f"{Ranked3v3Division}\n")
+                v3MMRFile.write(f"{Ranked3v3MMR}\n")
+                v3StreakFile.write(f"{Ranked3v3Streak}\n")
+                v3PlayedFile.write(f"{Ranked3v3Played}\n")
+
+    time.sleep(60)
+
