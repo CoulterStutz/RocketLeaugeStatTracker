@@ -1,5 +1,5 @@
 import json
-import time
+import time, funcs
 import termcolor
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
@@ -52,7 +52,7 @@ while True:
         Ranked1v1MMR = api_output['ranks'][0].get('mmr', 'N/A')
 
         # Write values for 1v1 to separate files
-        v1RankFile.write(f"{Ranked1v1Rank}\n")
+        v1RankFile.write(f"[color={get_rank_color(Ranked1v1Rank)}]{Ranked1v1Rank}\n")
         v1DivisionFile.write(f"{Ranked1v1Division}\n")
         v1MMRFile.write(f"{Ranked1v1MMR}\n")
         v1StreakFile.write(f"{Ranked1v1Streak}\n")
@@ -68,7 +68,7 @@ while True:
             Ranked2v2MMR = api_output['ranks'][1].get('mmr', 'N/A')
 
             # Write values for 2v2 to separate files
-            v2RankFile.write(f"{Ranked2v2Rank}\n")
+            v2RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked2v2Rank)}]{Ranked2v2Rank}\n"))
             v2DivisionFile.write(f"{Ranked2v2Division}\n")
             v2MMRFile.write(f"{Ranked2v2MMR}\n")
             v2StreakFile.write(f"{Ranked2v2Streak}\n")
@@ -86,7 +86,7 @@ while True:
                 # Write values for 3v3 to separate files
                 v3RankFile.write(f"{Ranked3v3Rank}\n")
                 v3DivisionFile.write(f"{Ranked3v3Division}\n")
-                v3MMRFile.write(f"{Ranked3v3MMR}\n")
+                            v2RankFile.write(v1RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n"))
                 v3StreakFile.write(f"{Ranked3v3Streak}\n")
                 v3PlayedFile.write(f"{Ranked3v3Played}\n")
 
