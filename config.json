@@ -1,5 +1,5 @@
 {
-  "DebugEnabled": false,
+  "DebugEnabled": true,
   "DebugDelay": 5,
   "APISettings": {
     "APIKey": "",
@@ -11,10 +11,9 @@
     }
   },
   "DisplaySettings": {
-    "DisplayTextWithLabel": true,
+    "DisplayTextWithLabel": false,
     "Colors": {
-      "DisplayTextWithColor": true,
-      "DisplayValueWithColor": true,
+      "DisplayValueWithColor": false,
       "Rank": {
         "Bronze": "#ff8b3d",
         "Silver": "#b5b5b5",
