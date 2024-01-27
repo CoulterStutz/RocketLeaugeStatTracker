@@ -14,6 +14,8 @@
     }
   },
   "DisplaySettings": {
+    "DisplayTextWithLabel": false,
+    "DisplayValuesWithColor": true,
     "Colors": {
       "Rank": {
         "Bronze": "#ff8b3d",
@@ -25,10 +27,9 @@
         "Grand": "#ff665e",
         "SSL": "#121212"
       },
-      "TextColors": {
+      "Text": {
         "LabelColor": {},
-        "ValueColor": {},
-        "": {}
+        "ValueColor": {}
       }
     }
   }
