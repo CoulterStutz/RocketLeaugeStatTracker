@@ -85,7 +85,9 @@ while True:
                 print("MMR:", RankedMMR)
                 print("Played: ", RankedPlayed)
 
-    print("\nRetrieved Stats")
+        print("\nRetrieved Stats")
+    else:
+        raise("APIERROR: Invalid API Key or Request Limit Reached! Please Wait Before Trying Again")
     time.sleep(APISettings["RefreshRate"])
 
     if not isDebugEnabled():

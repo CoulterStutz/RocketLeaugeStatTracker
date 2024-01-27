@@ -83,7 +83,8 @@ def clear_files():
 
 
 def get_rank_color(rank: str):
-    r = rank.split()[0].lower
+    r = rank.split()[0].lower()
+    print(r)
 
     if r == "bronze":
         return DS["Colors"]["Rank"]["Bronze"]
@@ -98,7 +99,7 @@ def get_rank_color(rank: str):
     elif r == "champion":
         return DS["Colors"]["Rank"]["Champion"]
     elif r == "grand":
-        return DS["Colors"]["Rank"]["Grand Champion"]
+        return DS["Colors"]["Rank"]["Grand"]
     elif r == "super":
         return DS["Colors"]["Rank"]["SSL"]
 

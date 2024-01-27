@@ -7,16 +7,10 @@
   },
   "Tracking": {
     "Self": {
-      "PlayerName": "psych0_naught",
+      "PlayerName": "USERNAME",
       "TrackSelf": true,
       "TrackTotalSeasonGames": true,
       "TrackCurrentRank": true
-    },
-    "Opponent": {
-      "TrackOpponents": false,
-      "TrackMultipleOpponents": false,
-      "TrackTotalSeasonGames": false,
-      "TrackCurrentRank": false
     }
   },
   "DisplaySettings": {
