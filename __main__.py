@@ -69,19 +69,19 @@ while True:
                 debug(InteractionTypes[1], f"{mode_name.lower()}rank.txt", RankedRank)
                 rank_file.flush()
 
-                division_file.write(f"{RankedDivision}\n")
+                division_file.write(f"{RankedDivision}")
                 debug(InteractionTypes[1], f"{mode_name.lower()}division.txt", RankedDivision)
                 division_file.flush()
 
-                mmr_file.write(f"{RankedMMR}\n")
+                mmr_file.write(f"{RankedMMR}")
                 debug(InteractionTypes[1], f"{mode_name.lower()}mmr.txt", RankedMMR)
                 mmr_file.flush()
 
-                streak_file.write(f"{RankedStreak}\n")
+                streak_file.write(f"{RankedStreak}")
                 debug(InteractionTypes[1], f"{mode_name.lower()}streak.txt", RankedStreak)
                 streak_file.flush()
 
-                played_file.write(f"{RankedPlayed}\n")
+                played_file.write(f"{RankedPlayed}")
                 debug(InteractionTypes[1], f"{mode_name.lower()}played.txt", RankedPlayed)
                 played_file.flush()
 
