@@ -41,6 +41,12 @@ def open_files():
     v3PlayedFile = open("out/3v3played.txt", "w")
     debug(InteractionTypes[0], "3v3played.txt")
 
+    return (v1RankFile, v1DivisionFile, v1MMRFile, v1StreakFile, v1PlayedFile,
+            v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile,
+            v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile)
+
+
+
 def close_files():
     # List of file paths
     file_paths = [
