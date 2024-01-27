@@ -1,5 +1,5 @@
 {
-  "DebugEnabled": false,
+  "DebugEnabled": true,
   "DebugDelay": 5,
   "APISettings": {
     "APIKey": "",
@@ -7,16 +7,14 @@
   },
   "Tracking": {
     "Self": {
-      "PlayerName": "USERNAME",
-      "TrackSelf": true,
-      "TrackTotalSeasonGames": true,
-      "TrackCurrentRank": true
+      "PlayerName": "USERNAME"
     }
   },
   "DisplaySettings": {
-    "DisplayTextWithLabel": false,
-    "DisplayValuesWithColor": true,
+    "DisplayTextWithLabel": true,
     "Colors": {
+      "DisplayTextWithColor": false,
+      "DisplayValueWithColor": false,
       "Rank": {
         "Bronze": "#ff8b3d",
         "Silver": "#b5b5b5",
@@ -29,7 +27,14 @@
       },
       "Text": {
         "LabelColor": {},
-        "ValueColor": {}
+        "ValueColor": {},
+        "Labels": {
+          "RankLabelText": "Rank:",
+          "DivisionLabelText": "Division:",
+          "MMRLabelText": "MMR:",
+          "PlayedLabelText": "Played:",
+          "StreakLabelText": "Current Win Streak:"
+        }
       }
     }
   }

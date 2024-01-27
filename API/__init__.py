@@ -2,7 +2,7 @@ import requests
 
 
 class RocketLeague():
-    def __init__(self, player_name, apiSettings, trackingSettings):
+    def __init__(self, player_name, apiSettings):
         self.url = "https://rocket-league1.p.rapidapi.com/ranks/psych0_naught"
         self.rankedheaders = {
             "User-Agent": "RapidAPI Playground",
@@ -13,7 +13,6 @@ class RocketLeague():
 
         self.player_name = player_name
         self.api = apiSettings
-        self.trackingSettings = trackingSettings
 
     def makeRankedAPIRequest(self):
         response = requests.get(self.url, headers=self.rankedheaders)
