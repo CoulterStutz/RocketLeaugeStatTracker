@@ -1,9 +1,9 @@
 {
-  "DebugEnabled": true,
+  "DebugEnabled": false,
   "DebugDelay": 5,
   "APISettings": {
     "APIKey": "",
-    "RefreshRate": 50
+    "RefreshRate": 600
   },
   "Tracking": {
     "Self": {
