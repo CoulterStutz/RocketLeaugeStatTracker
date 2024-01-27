@@ -1,4 +1,4 @@
-from funcs import open_files, close_files, get_rank_color
+from funcs import open_files, close_files, get_rank_color, clear_files
 from debug import debug, InteractionTypes, isDebugEnabled, debugDelay
 from termcolor import colored
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
@@ -19,18 +19,17 @@ DisplaySettings = config_data['DisplaySettings']
 if not os.path.exists("out"):
     os.mkdir("out")
 
-# Open files in write mode
-v1RankFile, v1DivisionFile, v1MMRFile, v1StreakFile, v1PlayedFile, \
-v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile, \
-v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile = open_files()
-
 # Initialize API with extracted data
 api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=APISettings, trackingSettings=TrackingConfig)
 
 debugDelay()
 
 while True:
-    close_files()
+
+    v1RankFile, v1DivisionFile, v1MMRFile, v1StreakFile, v1PlayedFile, \
+    v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile, \
+    v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile = open_files()
+
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
         api_output = {
