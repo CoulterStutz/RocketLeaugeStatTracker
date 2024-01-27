@@ -75,7 +75,9 @@ def clear_files():
         with open(file_path, 'w') as file:
             if isDebugEnabled():
                 debug(InteractionTypes[2], file_path)
-            file.write("")
+            file.seek(0)
+            file.truncate(0)
+            file.flush()
 
     close_files()
 
