@@ -9,7 +9,7 @@ from termcolor import colored
 
 with open('config.json', 'r') as file:
     config_data = json.load(file)
-debug = config_data['DebugEnabled']
+debugEnabled = config_data['DebugEnabled']
 debug_delay = config_data['DebugDelay']
 
 InteractionTypes = ["FileCreation", "FileWriting", "FileClearing", "FileClosing"]
@@ -39,7 +39,7 @@ rocket_league_ranks = [
 ]
 
 def isDebugEnabled():
-    return debug
+    return debugEnabled
 
 def debugDelay():
     if isDebugEnabled():
