@@ -1,5 +1,5 @@
 from funcs import open_files, close_files, get_rank_color, clear_files
-from debug import debug, InteractionTypes, isDebugEnabled, debugDelay
+from debug import debug, InteractionTypes, isDebugEnabled, debugDelay, get_debug_stats
 from termcolor import colored
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
@@ -32,16 +32,7 @@ while True:
 
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
-        api_output = {
-            'ranks': [
-                {'division': 4, 'played': 257, 'rank': 'Silver II', 'playlist': 'Duel (Ranked)', 'mmr': 386,
-                 'streak': 1},
-                {'division': 4, 'played': 85, 'rank': 'Silver III', 'playlist': 'Doubles (Ranked)', 'mmr': 468,
-                 'streak': 1},
-                {'division': 3, 'played': 15, 'rank': 'Bronze II', 'playlist': 'Standard (Ranked)', 'mmr': 202,
-                 'streak': -3}
-            ]
-        }
+        api_output = get_debug_stats()
     else:
         print(colored("Making API Request", "cyan"))
         api_output = api.makeRankedAPIRequest()
