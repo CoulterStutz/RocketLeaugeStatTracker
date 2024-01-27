@@ -1,8 +1,10 @@
-from funcs import *
-from debug import *
+from funcs import open_files, close_files, get_rank_color
+from debug import debug, InteractionTypes, isDebugEnabled, debugDelay
 from termcolor import colored
 from API import RocketLeague  # Assuming RocketLeague is the correct class in API.py
 import os
+import json
+import time
 
 # Read JSON from file
 with open('config.json', 'r') as file:
@@ -18,38 +20,9 @@ if not os.path.exists("out"):
     os.mkdir("out")
 
 # Open files in write mode
-v1RankFile = open("out/1v1rank.txt", "w")
-debug(InteractionTypes[0], "1v1rank.txt")
-v1DivisionFile = open("out/1v1division.txt", "w")
-debug(InteractionTypes[0], "1v1division.txt")
-v1MMRFile = open("out/1v1mmr.txt", "w")
-debug(InteractionTypes[0], "1v1mmr.txt")
-v1StreakFile = open("out/1v1streak.txt", "w")
-debug(InteractionTypes[0], "1v1streak.txt")
-v1PlayedFile = open("out/1v1played.txt", "w")
-debug(InteractionTypes[0], "1v1played.txt")
-
-v2RankFile = open("out/2v2rank.txt", "w")
-debug(InteractionTypes[0], "2v2rank.txt")
-v2DivisionFile = open("out/2v2division.txt", "w")
-debug(InteractionTypes[0], "2v2division.txt")
-v2MMRFile = open("out/2v2mmr.txt", "w")
-debug(InteractionTypes[0], "2v2mmr.txt")
-v2StreakFile = open("out/2v2streak.txt", "w")
-debug(InteractionTypes[0], "2v2streak.txt")
-v2PlayedFile = open("out/2v2played.txt", "w")
-debug(InteractionTypes[0], "2v2played.txt")
-
-v3RankFile = open("out/3v3rank.txt", "w")
-debug(InteractionTypes[0], "3v3rank.txt")
-v3DivisionFile = open("out/3v3division.txt", "w")
-debug(InteractionTypes[0], "3v3division.txt")
-v3MMRFile = open("out/3v3mmr.txt", "w")
-debug(InteractionTypes[0], "3v3mmr.txt")
-v3StreakFile = open("out/3v3streak.txt", "w")
-debug(InteractionTypes[0], "3v3streak.txt")
-v3PlayedFile = open("out/3v3played.txt", "w")
-debug(InteractionTypes[0], "3v3played.txt")
+v1RankFile, v1DivisionFile, v1MMRFile, v1StreakFile, v1PlayedFile, \
+v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile, \
+v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile = open_files()
 
 # Initialize API with extracted data
 api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings=APISettings, trackingSettings=TrackingConfig)
@@ -57,7 +30,7 @@ api = RocketLeague(player_name=TrackingConfig["Self"]["PlayerName"], apiSettings
 debugDelay()
 
 while True:
-    clear_files()
+    close_files()
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
         api_output = {
@@ -76,101 +49,52 @@ while True:
 
     # Check if 'ranks' key exists in the API response
     if 'ranks' in api_output:
-        # Extract values for 1v1
-        Ranked1v1Division = api_output['ranks'][0].get('division', 'N/A')
-        Ranked1v1Played = api_output['ranks'][0].get('played', 'N/A')
-        Ranked1v1Rank = api_output['ranks'][0].get('rank', 'N/A')
-        Ranked1v1Streak = api_output['ranks'][0].get('streak', 'N/A')
-        Ranked1v1MMR = api_output['ranks'][0].get('mmr', 'N/A')
+        for mode_index, mode_name in enumerate(['1v1', '2v2', '3v3']):
+            if mode_index < len(api_output['ranks']):
+                # Extract values for the current mode
+                current_mode = api_output['ranks'][mode_index]
+                RankedDivision = current_mode.get('division', 'N/A')
+                RankedPlayed = current_mode.get('played', 'N/A')
+                RankedRank = current_mode.get('rank', 'N/A')
+                RankedStreak = current_mode.get('streak', 'N/A')
+                RankedMMR = current_mode.get('mmr', 'N/A')
 
-        # Write values for 1v1 to separate files
-        v1RankFile.write(f"[color={get_rank_color(Ranked1v1Rank)}]{Ranked1v1Rank}\n")
-        debug(InteractionTypes[1], "1v1rank.txt", Ranked1v1Rank)
-        v1DivisionFile.write(f"{Ranked1v1Division}\n")
-        debug(InteractionTypes[1], "1v1division.txt", Ranked1v1Division)
-        v1MMRFile.write(f"{Ranked1v1MMR}\n")
-        debug(InteractionTypes[1], "1v1mmr.txt", Ranked1v1MMR)
-        v1StreakFile.write(f"{Ranked1v1Streak}\n")
-        debug(InteractionTypes[1], "1v1streak.txt", Ranked1v1Streak)
-        v1PlayedFile.write(f"{Ranked1v1Played}\n")
-        debug(InteractionTypes[1], "1v1played.txt", Ranked1v1Played)
+                # Write values for the current mode to separate files
+                rank_file, division_file, mmr_file, streak_file, played_file = locals()[f'v{mode_name[0]}RankFile'], \
+                                                                               locals()[f'v{mode_name[0]}DivisionFile'], \
+                                                                               locals()[f'v{mode_name[0]}MMRFile'], \
+                                                                               locals()[f'v{mode_name[0]}StreakFile'], \
+                                                                               locals()[f'v{mode_name[0]}PlayedFile']
 
-        v1RankFile.flush()
-        v1DivisionFile.flush()
-        v1MMRFile.flush()
-        v1StreakFile.flush()
-        v1PlayedFile.flush()
+                rank_file.write(f"[color={get_rank_color(RankedRank)}]{RankedRank}\n")
+                debug(InteractionTypes[1], f"{mode_name.lower()}rank.txt", RankedRank)
+                rank_file.flush()
 
-        # Check if there are more than one rank in the API response
-        if len(api_output['ranks']) > 1:
-            # Extract values for 2v2
-            Ranked2v2Division = api_output['ranks'][1].get('division', 'N/A')
-            Ranked2v2Played = api_output['ranks'][1].get('played', 'N/A')
-            Ranked2v2Rank = api_output['ranks'][1].get('rank', 'N/A')
-            Ranked2v2Streak = api_output['ranks'][1].get('streak', 'N/A')
-            Ranked2v2MMR = api_output['ranks'][1].get('mmr', 'N/A')
+                division_file.write(f"{RankedDivision}\n")
+                debug(InteractionTypes[1], f"{mode_name.lower()}division.txt", RankedDivision)
+                division_file.flush()
 
-            # Write values for 2v2 to separate files
-            v2RankFile.write(f"[color={get_rank_color(Ranked2v2Rank)}]{Ranked2v2Rank}\n")
-            debug(InteractionTypes[1], "2v2rank.txt", Ranked2v2Rank)
-            v2DivisionFile.write(f"{Ranked2v2Division}\n")
-            debug(InteractionTypes[1], "2v2division.txt", Ranked2v2Division)
-            v2MMRFile.write(f"{Ranked2v2MMR}\n")
-            debug(InteractionTypes[1], "2v2mmr.txt", Ranked2v2MMR)
-            v2StreakFile.write(f"{Ranked2v2Streak}\n")
-            debug(InteractionTypes[1], "2v2streak.txt", Ranked2v2Streak)
-            v2PlayedFile.write(f"{Ranked2v2Played}\n")
-            debug(InteractionTypes[1], "2v2played.txt", Ranked2v2Played)
+                mmr_file.write(f"{RankedMMR}\n")
+                debug(InteractionTypes[1], f"{mode_name.lower()}mmr.txt", RankedMMR)
+                mmr_file.flush()
 
-            v2RankFile.flush()
-            v2DivisionFile.flush()
-            v2MMRFile.flush()
-            v2StreakFile.flush()
-            v2PlayedFile.flush()
+                streak_file.write(f"{RankedStreak}\n")
+                debug(InteractionTypes[1], f"{mode_name.lower()}streak.txt", RankedStreak)
+                streak_file.flush()
 
-            # Check if there are more than two ranks in the API response
-            if len(api_output['ranks']) > 2:
-                # Extract values for 3v3
-                Ranked3v3Division = api_output['ranks'][2].get('division', 'N/A')
-                Ranked3v3Played = api_output['ranks'][2].get('played', 'N/A')
-                Ranked3v3Rank = api_output['ranks'][2].get('rank', 'N/A')
-                Ranked3v3Streak = api_output['ranks'][2].get('streak', 'N/A')
-                Ranked3v3MMR = api_output['ranks'][2].get('mmr', 'N/A')
+                played_file.write(f"{RankedPlayed}\n")
+                debug(InteractionTypes[1], f"{mode_name.lower()}played.txt", RankedPlayed)
+                played_file.flush()
 
-                # Write values for 3v3 to separate files
-                v3RankFile.write(f"[color={get_rank_color(Ranked3v3Rank)}]{Ranked3v3Rank}\n")
-                debug(InteractionTypes[1], "3v3rank.txt", Ranked3v3Rank)
-                v3DivisionFile.write(f"{Ranked3v3Division}\n")
-                debug(InteractionTypes[1], "3v3division.txt", Ranked3v3Division)
-                v3MMRFile.write(f"{Ranked3v3MMR}\n")
-                debug(InteractionTypes[1], "3v3mmr.txt", Ranked3v3MMR)
-                v3StreakFile.write(f"{Ranked3v3Streak}\n")
-                debug(InteractionTypes[1], "3v3streak.txt", Ranked3v3Streak)
-                v3PlayedFile.write(f"{Ranked3v3Played}\n")
-                debug(InteractionTypes[1], "3v3played.txt", Ranked3v3Played)
+                # Additional debug information
+                if mode_index == 0:
+                    print(colored("Fetched Ranks!", "Green"))
 
-                v3RankFile.flush()
-                v3DivisionFile.flush()
-                v3MMRFile.flush()
-                v3StreakFile.flush()
-                v3PlayedFile.flush()
-                
-                print(colored("Fetched Ranks!", "Green"))
+                print(f"\n{mode_name} Stats:")
+                print("Rank:", RankedRank, RankedDivision)
+                print("MMR:", RankedMMR)
+                print("Played: ", RankedPlayed)
 
-                print("\n1v1 Stats:")
-                print("Rank:", Ranked1v1Rank, Ranked1v1Division)
-                print("MMR:", Ranked1v1MMR)
-                print("Played: ", Ranked1v1Played)
-
-                print("\n2v2 Stats:")
-                print("Rank:", Ranked2v2Rank, Ranked2v2Division)
-                print("MMR:", Ranked2v2MMR)
-                print("Played: ", Ranked2v2Played)
-
-                print("\n3v3 Stats:")
-                print("Rank:", Ranked3v3Rank, Ranked3v3Division)
-                print("MMR:", Ranked3v3MMR)
-                print("Played: ", Ranked3v3Played)
     print("\nRetrieved Stats")
     time.sleep(APISettings["RefreshRate"])
 
@@ -178,4 +102,4 @@ while True:
         os.system("cls")
 
 # Close all files at the end of the script
-funcs.close_files()
+close_files()
