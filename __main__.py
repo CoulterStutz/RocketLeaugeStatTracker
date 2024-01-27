@@ -53,8 +53,7 @@ while True:
                                                                                locals()[f'v{mode_name[0]}StreakFile'], \
                                                                                locals()[f'v{mode_name[0]}PlayedFile']
 
-                label_color = DisplaySettings['Colors']['Text']['LabelColor'].get(mode_name.capitalize(), '')
-                value_color = DisplaySettings['Colors']['Text']['ValueColor'].get(mode_name.capitalize(), '')
+                label_color = DisplaySettings['Colors']['Text']['LabelColor']
 
                 # Construct the label and value strings
                 label_str = DisplaySettings['Colors']['Text']['Labels'].get(f"{mode_name.capitalize()}LabelText", '')

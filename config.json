@@ -1,5 +1,5 @@
 {
-  "DebugEnabled": true,
+  "DebugEnabled": false,
   "DebugDelay": 5,
   "APISettings": {
     "APIKey": "",
@@ -13,8 +13,8 @@
   "DisplaySettings": {
     "DisplayTextWithLabel": true,
     "Colors": {
-      "DisplayTextWithColor": false,
-      "DisplayValueWithColor": false,
+      "DisplayTextWithColor": true,
+      "DisplayValueWithColor": true,
       "Rank": {
         "Bronze": "#ff8b3d",
         "Silver": "#b5b5b5",
@@ -26,8 +26,7 @@
         "SSL": "#121212"
       },
       "Text": {
-        "LabelColor": {},
-        "ValueColor": {},
+        "LabelColor": "#ffffff",
         "Labels": {
           "RankLabelText": "Rank:",
           "DivisionLabelText": "Division:",
