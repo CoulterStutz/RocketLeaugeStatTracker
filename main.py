@@ -103,11 +103,11 @@ while True:
                     streak_file.flush()
                     played_file.flush()
                 else:
-                    rank_file.write(f"{rank_value_str}\n")
-                    division_file.write(f"{division_value_str}\n")
-                    mmr_file.write(f"{mmr_value_str}\n")
-                    streak_file.write(f"{streak_value_str}\n")
-                    played_file.write(f"{played_value_str}\n")
+                    rank_file.write(f"{RankedRank} {RankedDivision}\n")
+                    division_file.write(f"{RankedDivision}\n")
+                    mmr_file.write(f"{RankedMMR}\n")
+                    streak_file.write(f"{RankedStreak}\n")
+                    played_file.write(f"{RankedPlayed}\n")
 
                     rank_file.flush()
                     division_file.flush()
