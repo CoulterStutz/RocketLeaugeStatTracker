@@ -30,7 +30,8 @@ while True:
 
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
-        api_output = get_debug_stats()
+        debug_api_output = get_debug_stats()
+        api_output = debug_api_output if debug_api_output else api.makeRankedAPIRequest()
     else:
         print(colored("Making API Request", "cyan"))
         api_output = api.makeRankedAPIRequest()
