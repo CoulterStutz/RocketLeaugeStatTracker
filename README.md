@@ -3,6 +3,10 @@
 ## Overview
 Rocket League Stream Labels Program is a tool designed for use in OBS, XSplit, Streamlabs OBS, and other recording/streaming software that supports displaying text from files. It provides real-time updates of Rocket League ranks and statistics for use in live streams or recordings.
 
+## Requirements
+    + Python3
+    + git
+
 ## Installation + Configuration
 ### A. Downloading Repository + Dependencies
 ```commandline
