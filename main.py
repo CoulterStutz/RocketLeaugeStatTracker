@@ -98,7 +98,7 @@ while True:
 
                 # Additional debug information
                 if mode_index == 0:
-                    print(colored("Fetched Ranks!", "Green"))
+                    print(colored("Fetched Ranks!", "green"))
 
                 print(f"\n{mode_name} Stats:")
                 print(f"{rank_value_str}")
