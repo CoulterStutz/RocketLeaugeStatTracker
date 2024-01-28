@@ -25,8 +25,8 @@ debugDelay()
 
 while True:
     v1RankFile, v1DivisionFile, v1MMRFile, v1StreakFile, v1PlayedFile, \
-    v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile, \
-    v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile = open_files()
+        v2RankFile, v2DivisionFile, v2MMRFile, v2StreakFile, v2PlayedFile, \
+        v3RankFile, v3DivisionFile, v3MMRFile, v3StreakFile, v3PlayedFile = open_files()
 
     if isDebugEnabled():
         print(colored("Making Debug API Request", "cyan"))
@@ -48,10 +48,10 @@ while True:
 
                 # Write values for the current mode to separate files
                 rank_file, division_file, mmr_file, streak_file, played_file = locals()[f'v{mode_name[0]}RankFile'], \
-                                                                               locals()[f'v{mode_name[0]}DivisionFile'], \
-                                                                               locals()[f'v{mode_name[0]}MMRFile'], \
-                                                                               locals()[f'v{mode_name[0]}StreakFile'], \
-                                                                               locals()[f'v{mode_name[0]}PlayedFile']
+                    locals()[f'v{mode_name[0]}DivisionFile'], \
+                    locals()[f'v{mode_name[0]}MMRFile'], \
+                    locals()[f'v{mode_name[0]}StreakFile'], \
+                    locals()[f'v{mode_name[0]}PlayedFile']
 
                 label_color = DisplaySettings['Colors']['Text']['LabelColor']
 
@@ -63,7 +63,8 @@ while True:
                 streak_label_str = DisplaySettings['Colors']['Text']['Labels'].get("StreakLabelText", '')
                 played_label_str = DisplaySettings['Colors']['Text']['Labels'].get("PlayedLabelText", '')
 
-                rank_value_str = f"[color={get_rank_color(RankedRank)}]{rank_label_str} {RankedRank}[/color]" if DisplaySettings['Colors']['DisplayValueWithColor'] else f"{rank_label_str} {RankedRank}"
+                rank_value_str = f"[color={get_rank_color(RankedRank)}]{rank_label_str} {RankedRank}[/color]" if \
+                DisplaySettings['Colors']['DisplayValueWithColor'] else f"{rank_label_str} {RankedRank}"
                 division_value_str = f"{division_label_str} {RankedDivision}"
                 mmr_value_str = f"{mmr_label_str} {RankedMMR}"
                 streak_value_str = f"{streak_label_str} {RankedStreak}"
@@ -71,28 +72,33 @@ while True:
 
                 # Write values with or without BB code and labels
                 rank_file.write(f"[color={label_color}]{label_str} {rank_value_str}[/color]\n")
-                debug(InteractionTypes[1], f"{mode_name.lower()}rank.txt", f"[color={label_color}]{label_str} {rank_value_str}[/color]")
+                debug(InteractionTypes[1], f"{mode_name.lower()}rank.txt",
+                      f"[color={label_color}]{label_str} {rank_value_str}[/color]")
                 rank_file.flush()
 
                 division_file.write(f"[color={label_color}]{label_str} {division_value_str}[/color]\n")
-                debug(InteractionTypes[1], f"{mode_name.lower()}division.txt", f"[color={label_color}]{label_str} {division_value_str}[/color]")
+                debug(InteractionTypes[1], f"{mode_name.lower()}division.txt",
+                      f"[color={label_color}]{label_str} {division_value_str}[/color]")
                 division_file.flush()
 
                 mmr_file.write(f"[color={label_color}]{label_str} {mmr_value_str}[/color]\n")
-                debug(InteractionTypes[1], f"{mode_name.lower()}mmr.txt", f"[color={label_color}]{label_str} {mmr_value_str}[/color]")
+                debug(InteractionTypes[1], f"{mode_name.lower()}mmr.txt",
+                      f"[color={label_color}]{label_str} {mmr_value_str}[/color]")
                 mmr_file.flush()
 
                 streak_file.write(f"[color={label_color}]{label_str} {streak_value_str}[/color]\n")
-                debug(InteractionTypes[1], f"{mode_name.lower()}streak.txt", f"[color={label_color}]{label_str} {streak_value_str}[/color]")
+                debug(InteractionTypes[1], f"{mode_name.lower()}streak.txt",
+                      f"[color={label_color}]{label_str} {streak_value_str}[/color]")
                 streak_file.flush()
 
                 played_file.write(f"[color={label_color}]{label_str} {played_value_str}[/color]\n")
-                debug(InteractionTypes[1], f"{mode_name.lower()}played.txt", f"[color={label_color}]{label_str} {played_value_str}[/color]")
+                debug(InteractionTypes[1], f"{mode_name.lower()}played.txt",
+                      f"[color={label_color}]{label_str} {played_value_str}[/color]")
                 played_file.flush()
 
                 # Additional debug information
                 if mode_index == 0:
-                    print(colored("Fetched Ranks!", "Green"))
+                    print(colored("Fetched Ranks!", "green"))
 
                 print(f"\n{mode_name} Stats:")
                 print(f"{rank_value_str}")
@@ -103,7 +109,7 @@ while True:
 
         print("\nRetrieved Stats")
     else:
-        raise("APIERROR: Invalid API Key or Request Limit Reached! Please Wait Before Trying Again")
+        raise ("APIERROR: Invalid API Key or Request Limit Reached! Please Wait Before Trying Again")
     time.sleep(APISettings["RefreshRate"])
 
     if not isDebugEnabled():
